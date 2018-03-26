@@ -31,22 +31,26 @@ p {
 }
 
 #rock {
-  width: 32%;
+  width: 80px;
   margin: 0 auto;
 }
 
 #paper {
-  width: 33%;
+  width: 80px;
   margin: 0 auto;
 }
 
 #scissors {
-  width: 32%;
+  width: 80px;
   margin: 0 auto;
-  float:right;
+}
+
+#buttonBox {
+  width: 260px;
+  margin: 0 auto;
 }
 
 #playAgain {
-  width: 20%;
+  width: 130px;
   margin: 0 auto;
 }
