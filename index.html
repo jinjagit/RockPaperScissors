@@ -1,107 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Functions - Odin Course: Fundamentals, Part 3</title>
+  <title>Rock, Paper, Scissors - Odin Course: JS Fundamentals</title>
   <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700" rel="stylesheet">
   <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-  <p id="note">Note: modulo operation will round float inputs to integers</p>
+  <div id="wrapper">
+    <p>Choose your weapon!</p>
+    <p>First to score of 5 wins.</p>
+    <div id="spacer"></div>
+    <p id="score"></p>
+    <div id="spacer"></div>
 
-  <form>a:
-    <input type="number" step="any" id="inA">
-  </form>
-  <form>b:
-    <input type="number" step="any" id="inB">
-  </form>
+    <button onclick="rock()" id="rock">rock</button>
+    <button onclick="paper()" id="paper">paper</button>
+    <button onclick="scissors()" id="scissors">scissors</button>
 
-  <div></div>
+    <div id="spacer"></div>
 
-  <button onclick="addAtoB()">a + b</button>
-  <button onclick="AminusB()">a - b</button>
-  <button onclick="multAbyB()">a * b</button>
-  <button onclick="divAbyB()">a / b</button>
-  <button onclick="aPowB()">a ^ b</button>
-  <button onclick="aRootB()">a ^ 1/b</button>
-  <button onclick="aModB()">a % b</button>
+    <p id="output"></p>
+    <p id="gameOver"></p>
 
-  <p id="output"></p>
+    <button onclick="playAgain()" id="playAgain">play again</button>
 
-  <form>text input:
-    <input type="text" step="any" id="textIn">
-  </form>
+    <script>
 
-  <div></div>
+      let result = "";
+      let playerScore = 0;
+      let compScore = 0;
+      let playerWeapon = 0;
+      let compWeapon = 0;
+      let weapons = ['rock', 'paper', 'scissors'];
 
-  <button onclick="capitalize()">Capitalize</button>
-  <button onclick="lastLetter()">last letter</button>
+      document.getElementById("score").innerHTML = "You: " + playerScore + " vs. Computer: " + compScore;
+      document.getElementById("playAgain").style.display = 'none';
 
-  <p id="textOutput"></p>
+      function rock() {
+        playerWeapon = 0;
+        playRound(playerWeapon);
+      }
 
-  <script>
-    document.getElementById("output").innerHTML = "--- nothing calculated ---";
-    document.getElementById("textOutput").innerHTML = "--- no text processed ---";
-    let str = "";
-    let a = 0.0;
-    let b = 0.0;
+      function paper() {
+        playerWeapon = 1;
+        playRound(playerWeapon);
+      }
 
-    function getInputs() {
-      a = parseFloat(document.getElementById("inA").value);
-      b = parseFloat(document.getElementById("inB").value);
-      return(a, b);
-    }
+      function scissors() {
+        playerWeapon = 2;
+        playRound(playerWeapon);
+      }
 
-    function addAtoB() {
-      a, b = getInputs();
-      document.getElementById("output").innerHTML = a + b;
-    }
+      function playRound(playerWeapon) {
+        if (playerScore < 5 && compScore < 5) {
+          compWeapon = Math.floor(Math.random() * 3);
+          if (playerWeapon === compWeapon) {
+            result = "draw";
+            updateScore(playerWeapon, compWeapon, result);
+          } else if ((playerWeapon === 0 && compWeapon === 1) || (playerWeapon === 1 && compWeapon === 2) || (playerWeapon === 2 && compWeapon === 0)) {
+            result = "lose";
+            compScore += 1;
+            updateScore(playerWeapon, compWeapon, result);
+          } else {
+            result = "win";
+            playerScore += 1;
+            updateScore(playerWeapon, compWeapon, result);
+          }
+          document.getElementById("score").innerHTML = "You: " + playerScore + " vs. Computer: " + compScore;
+        }
+      }
 
-    function AminusB() {
-      a, b = getInputs();
-      document.getElementById("output").innerHTML = a - b;
-    }
+      function updateScore(playerWeapon, compWeapon, result) {
+        if (result === "draw") {
+          document.getElementById("output").innerHTML = "Result: DRAW You chose: " + weapons[playerWeapon] + " / computer chose: " + weapons[compWeapon];
+        } else if (result === "win") {
+          document.getElementById("output").innerHTML = "Result: WIN! You chose: " + weapons[playerWeapon] + " / computer chose: " + weapons[compWeapon];
+        } else {
+          document.getElementById("output").innerHTML = "Result: LOSS! You chose: " + weapons[playerWeapon] + " / computer chose: " + weapons[compWeapon];
+        }
 
-    function multAbyB() {
-      a, b = getInputs();
-      document.getElementById("output").innerHTML = a * b;
-    }
+        if (playerScore === 5) {
+          document.getElementById("gameOver").innerHTML = "GAME OVER!" + "<br />" + "<br />" + "YOU WIN!";
+          document.getElementById("playAgain").style.display = 'block';
+        } else if (compScore === 5) {
+          document.getElementById("gameOver").innerHTML = "GAME OVER!" + "<br />" + "<br />" + "YOU WIN!";
+          document.getElementById("playAgain").style.display = 'block';
+        }
+      }
 
-    function divAbyB() {
-      a, b = getInputs();
-      document.getElementById("output").innerHTML = a / b;
-    }
+      function playAgain() {
+        playerScore = 0;
+        compScore = 0;
+        document.getElementById("score").innerHTML = "You: " + playerScore + " vs. Computer: " + compScore;
+        document.getElementById("gameOver").innerHTML = "";
+        document.getElementById("output").innerHTML = "";
+        document.getElementById("playAgain").style.display = 'none';
+      }
 
-    function aPowB() {
-      a, b = getInputs();
-      document.getElementById("output").innerHTML = Math.pow(a, b);
-    }
-
-    function aRootB() {
-      a, b = getInputs();
-      document.getElementById("output").innerHTML = Math.pow(a, (1 / b));
-    }
-
-    function aModB() {
-      a, b = getInputs();
-      a = Math.round(a);
-      b = Math.round(b);
-      document.getElementById("inA").value = a;
-      document.getElementById("inB").value= b;
-      document.getElementById("output").innerHTML = a % b;
-    }
-
-    function capitalize() {
-      str = document.getElementById("textIn").value;
-      let first = str.slice(0, 1).toUpperCase();
-      let rest = str.slice(1).toLowerCase();
-      document.getElementById("textOutput").innerHTML = first + rest;
-    }
-
-    function lastLetter() {
-      str = document.getElementById("textIn").value;
-      document.getElementById("textOutput").innerHTML = str.slice(-1);
-    }
-
-  </script>
+    </script>
+  </div>
 </body>
 </html>

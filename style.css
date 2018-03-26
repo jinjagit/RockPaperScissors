@@ -2,7 +2,7 @@ body {
   font-family: 'Space+Mono', monospace;
   color: white;
   padding: 0;
-  margin: 50px;
+  margin: 0 auto;
   background-color: #1f1f19;
 }
 
@@ -12,11 +12,41 @@ body * {
   background-color: #1f1f19;
 }
 
-div {
+#spacer {
   height: 20px;
   width: 100%;
 }
 
-#note {
-  font-size:  12px;
+button {
+  font-size: 18px;
+}
+
+p {
+  text-align: center;
+}
+
+#wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+#rock {
+  width: 32%;
+  margin: 0 auto;
+}
+
+#paper {
+  width: 33%;
+  margin: 0 auto;
+}
+
+#scissors {
+  width: 32%;
+  margin: 0 auto;
+  float:right;
+}
+
+#playAgain {
+  width: 20%;
+  margin: 0 auto;
 }
