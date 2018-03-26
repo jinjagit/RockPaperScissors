@@ -1,0 +1,22 @@
+body {
+  font-family: 'Space+Mono', monospace;
+  color: white;
+  padding: 0;
+  margin: 50px;
+  background-color: #1f1f19;
+}
+
+body * {
+  border-color: #4a4a3c;
+  color: #c5c59e;
+  background-color: #1f1f19;
+}
+
+div {
+  height: 20px;
+  width: 100%;
+}
+
+#note {
+  font-size:  12px;
+}

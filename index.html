@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Functions - Odin Course: Fundamentals, Part 3</title>
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700" rel="stylesheet">
+  <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+  <p id="note">Note: modulo operation will round float inputs to integers</p>
+
+  <form>a:
+    <input type="number" step="any" id="inA">
+  </form>
+  <form>b:
+    <input type="number" step="any" id="inB">
+  </form>
+
+  <div></div>
+
+  <button onclick="addAtoB()">a + b</button>
+  <button onclick="AminusB()">a - b</button>
+  <button onclick="multAbyB()">a * b</button>
+  <button onclick="divAbyB()">a / b</button>
+  <button onclick="aPowB()">a ^ b</button>
+  <button onclick="aRootB()">a ^ 1/b</button>
+  <button onclick="aModB()">a % b</button>
+
+  <p id="output"></p>
+
+  <form>text input:
+    <input type="text" step="any" id="textIn">
+  </form>
+
+  <div></div>
+
+  <button onclick="capitalize()">Capitalize</button>
+  <button onclick="lastLetter()">last letter</button>
+
+  <p id="textOutput"></p>
+
+  <script>
+    document.getElementById("output").innerHTML = "--- nothing calculated ---";
+    document.getElementById("textOutput").innerHTML = "--- no text processed ---";
+    let str = "";
+    let a = 0.0;
+    let b = 0.0;
+
+    function getInputs() {
+      a = parseFloat(document.getElementById("inA").value);
+      b = parseFloat(document.getElementById("inB").value);
+      return(a, b);
+    }
+
+    function addAtoB() {
+      a, b = getInputs();
+      document.getElementById("output").innerHTML = a + b;
+    }
+
+    function AminusB() {
+      a, b = getInputs();
+      document.getElementById("output").innerHTML = a - b;
+    }
+
+    function multAbyB() {
+      a, b = getInputs();
+      document.getElementById("output").innerHTML = a * b;
+    }
+
+    function divAbyB() {
+      a, b = getInputs();
+      document.getElementById("output").innerHTML = a / b;
+    }
+
+    function aPowB() {
+      a, b = getInputs();
+      document.getElementById("output").innerHTML = Math.pow(a, b);
+    }
+
+    function aRootB() {
+      a, b = getInputs();
+      document.getElementById("output").innerHTML = Math.pow(a, (1 / b));
+    }
+
+    function aModB() {
+      a, b = getInputs();
+      a = Math.round(a);
+      b = Math.round(b);
+      document.getElementById("inA").value = a;
+      document.getElementById("inB").value= b;
+      document.getElementById("output").innerHTML = a % b;
+    }
+
+    function capitalize() {
+      str = document.getElementById("textIn").value;
+      let first = str.slice(0, 1).toUpperCase();
+      let rest = str.slice(1).toLowerCase();
+      document.getElementById("textOutput").innerHTML = first + rest;
+    }
+
+    function lastLetter() {
+      str = document.getElementById("textIn").value;
+      document.getElementById("textOutput").innerHTML = str.slice(-1);
+    }
+
+  </script>
+</body>
+</html>
